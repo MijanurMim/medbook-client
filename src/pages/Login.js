@@ -17,6 +17,8 @@ const Login = () => {
 
       const res = await axios.post("/api/v1/user/login", values);
 
+      window.location.reload();
+
       dispatch(hideLoading());
 
       if (res.data.success) {
