@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Layout from "../../components/Layout";
 import axios from "axios";
 import { message, Table } from "antd";
+import baseURL from "../../baseURL";
 
 const Doctors = () => {
   const [doctors, setDoctors] = useState([]);
@@ -9,7 +10,7 @@ const Doctors = () => {
   //getDoctors
   const getDoctors = async () => {
     try {
-      const res = await axios.get("/api/v1/admin/getAllDoctors", {
+      const res = await axios.get(`${baseURL}/api/v1/admin/getAllDoctors`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

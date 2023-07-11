@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import baseURL from "../baseURL";
 
 const DoctorsList = ({ doctor }) => {
   const navigate = useNavigate();
@@ -8,7 +9,9 @@ const DoctorsList = ({ doctor }) => {
       <div
         className="card m-2"
         style={{ cursor: "pointer" }}
-        onClick={() => navigate(`/doctor/book-appointment/${doctor._id}`)}
+        onClick={() =>
+          navigate(`${baseURL}/doctor/book-appointment/${doctor._id}`)
+        }
       >
         <div className="card-header">
           Dr. {doctor.firstName} {doctor.lastName}
