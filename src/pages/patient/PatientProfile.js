@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout";
 import axios from "axios";
@@ -8,20 +7,18 @@ import { useSelector, useDispatch } from "react-redux";
 import { showLoading, hideLoading } from "../../redux/features/alertSlice";
 import moment from "moment";
 
-const DoctorProfile = () => {
+const PatientProfile = () => {
   const { user } = useSelector((state) => state.user);
-  const [doctor, setDoctor] = useState(null);
+  const [patient, setPatient] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const params = useParams();
 
-  // update doc
-  //handle form
   const handleFinish = async (values) => {
     try {
       dispatch(showLoading());
       const res = await axios.post(
-        "/api/v1/doctor/updateProfile",
+        "/api/v1/patient/updateProfile",
         {
           ...values,
           userId: user._id,
@@ -49,13 +46,12 @@ const DoctorProfile = () => {
       message.error("Something Went Wrong ");
     }
   };
-  // update doc ==========
 
   //getDOc Details
-  const getDoctorInfo = async () => {
+  const getPatientInfo = async () => {
     try {
       const res = await axios.post(
-        "/api/v1/doctor/getDoctorInfo",
+        "/api/v1/patient/getPatientInfo",
         { userId: params.id },
         {
           headers: {
@@ -64,7 +60,7 @@ const DoctorProfile = () => {
         }
       );
       if (res.data.success) {
-        setDoctor(res.data.data);
+        setPatient(res.data.data);
       }
     } catch (error) {
       console.log(error);
@@ -72,7 +68,7 @@ const DoctorProfile = () => {
   };
 
   useEffect(() => {
-    getDoctorInfo();
+    getPatientInfo();
     //eslint-disable-next-line
   }, []);
 
@@ -80,16 +76,16 @@ const DoctorProfile = () => {
     <Layout>
       {" "}
       <h1>Manage Profile</h1>
-      {doctor && (
+      {patient && (
         <Form
           layout="vertical"
           onFinish={handleFinish}
           className="m-3"
           initialValues={{
-            ...doctor,
+            ...patient,
             timings: [
-              moment(doctor.timings[0], "HH:mm"),
-              moment(doctor.timings[1], "HH:mm"),
+              moment(patient.timings[0], "HH:mm"),
+              moment(patient.timings[1], "HH:mm"),
             ],
           }}
         >
@@ -135,11 +131,7 @@ const DoctorProfile = () => {
                 <Input type="email" placeholder="your email address" />
               </Form.Item>
             </Col>
-            <Col xs={24} md={24} lg={8}>
-              <Form.Item label="Website" name="website">
-                <Input type="text" placeholder="your website" />
-              </Form.Item>
-            </Col>
+
             <Col xs={24} md={24} lg={8}>
               <Form.Item
                 label="Address"
@@ -147,47 +139,57 @@ const DoctorProfile = () => {
                 required
                 rules={[{ required: true }]}
               >
-                <Input type="text" placeholder="your clinic address" />
+                <Input type="text" placeholder="your address" />
               </Form.Item>
             </Col>
           </Row>
-          <h4>Professional Details :</h4>
+          <h4>Medical History :</h4>
+
           <Row gutter={20}>
             <Col xs={24} md={24} lg={8}>
               <Form.Item
-                label="Specialization"
-                name="specialization"
+                label="Previous Disease"
+                name="previousDisease"
                 required
                 rules={[{ required: true }]}
               >
-                <Input type="text" placeholder="your specialization" />
+                <Input type="text" placeholder="Your Previous Disease " />
               </Form.Item>
             </Col>
+
             <Col xs={24} md={24} lg={8}>
               <Form.Item
-                label="Experience"
-                name="experience"
+                label="Previous Medicines"
+                name="previousMedicines"
                 required
                 rules={[{ required: true }]}
               >
-                <Input type="text" placeholder="your experience" />
+                <Input type="text" placeholder="your previous Medicines" />
               </Form.Item>
             </Col>
+
             <Col xs={24} md={24} lg={8}>
               <Form.Item
-                label="Fees Per Consultation"
-                name="feesPerConsultation"
+                label="Current Medicines"
+                name="currentMedicines"
                 required
                 rules={[{ required: true }]}
               >
                 <Input type="text" placeholder="Fees Amount" />
               </Form.Item>
             </Col>
+
             <Col xs={24} md={24} lg={8}>
-              <Form.Item label="Timings" name="timings" required>
-                <TimePicker.RangePicker format="HH:mm" />
+              <Form.Item
+                label="Current Disease"
+                name="currentDisease"
+                required
+                rules={[{ required: true }]}
+              >
+                <Input type="text" placeholder="Fees Amount" />
               </Form.Item>
             </Col>
+
             <Col xs={24} md={24} lg={8}></Col>
             <Col xs={24} md={24} lg={8}>
               <button className="btn btn-primary form-btn" type="submit">
@@ -201,4 +203,4 @@ const DoctorProfile = () => {
   );
 };
 
-export default DoctorProfile;
+export default PatientProfile;

@@ -25,6 +25,7 @@ const Users = () => {
   useEffect(() => {
     getUsers();
   }, []);
+
   // antD table col
   const columns = [
     {
@@ -39,6 +40,11 @@ const Users = () => {
       title: "Doctor",
       dataIndex: "isDoctor",
       render: (text, record) => <span>{record.isDoctor ? "Yes" : "No"}</span>,
+    },
+    {
+      title: "Patient",
+      dataIndex: "isPatient",
+      render: (text, record) => <span>{record.isPatient ? "Yes" : "No"}</span>,
     },
     {
       title: "Actions",

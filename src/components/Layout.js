@@ -9,6 +9,7 @@ import { IoMdNotifications } from "react-icons/io";
 import { adminMenu, userMenu } from "./../data/data";
 import { LuLogOut } from "react-icons/lu";
 import { Badge, message } from "antd";
+import HomePage from "../pages/HomePage";
 
 const Layout = ({ children }) => {
   const { user } = useSelector((state) => state.user);
@@ -31,13 +32,19 @@ const Layout = ({ children }) => {
     },
     {
       name: "Appointments",
-      path: "/appointments",
+      path: "/doctor-appointments",
       icon: <FaClipboardList />,
     },
 
     {
-      name: "Profile",
+      name: "Dr Profile",
       path: `/doctor/profile/${user?._id}`,
+      icon: <FaUserMd />,
+    },
+
+    {
+      name: "Patient Profile",
+      path: `/patient/profile/${user?._id}`,
       icon: <FaUserMd />,
     },
   ];
@@ -48,6 +55,8 @@ const Layout = ({ children }) => {
     : user?.isDoctor
     ? doctorMenu
     : userMenu;
+  // ? null
+  // : userMenu;
 
   return (
     <>

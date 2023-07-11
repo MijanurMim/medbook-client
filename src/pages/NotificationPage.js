@@ -29,6 +29,8 @@ const NotificationPage = () => {
       );
       dispatch(hideLoading());
       if (res.data.success) {
+        window.location.reload();
+
         message.success(res.data.message);
       } else {
         message.error(res.data.message);
@@ -55,6 +57,8 @@ const NotificationPage = () => {
       );
       dispatch(hideLoading());
       if (res.data.success) {
+        window.location.reload();
+
         message.success(res.data.message);
       } else {
         message.error(res.data.message);

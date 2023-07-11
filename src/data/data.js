@@ -22,10 +22,15 @@ export const userMenu = [
     icon: <FaUserMd />,
   },
   {
-    name: "Profile",
-    path: "/profile",
+    name: "Apply Patient",
+    path: "/apply-patient",
     icon: <FaUserInjured />,
   },
+  // {
+  //   name: "Profile",
+  //   path: "/profile",
+  //   icon: <FaUserInjured />,
+  // },
 ];
 
 // Admin Menu
@@ -41,13 +46,18 @@ export const adminMenu = [
     icon: <FaUserMd />,
   },
   {
+    name: "Patients",
+    path: "/admin/patients",
+    icon: <FaUserInjured />,
+  },
+  {
     name: "Users",
     path: "/admin/users",
     icon: <FaClipboardList />,
   },
-  {
-    name: "Profile",
-    path: "/profile",
-    icon: <CgProfile />,
-  },
+  // {
+  //   name: "Profile",
+  //   path: "/profile",
+  //   icon: <CgProfile />,
+  // },
 ];

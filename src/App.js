@@ -14,21 +14,36 @@ import DoctorProfile from "./pages/doctor/DoctorProfile";
 import BookingPage from "./pages/BookingPage";
 import Appointments from "./pages/Appointments";
 import DoctorAppointments from "./pages/doctor/DoctorAppointment";
+import ApplyPatient from "./pages/ApplyPatient";
+import Patients from "./pages/admin/Patients";
+import PatientProfile from "./pages/patient/PatientProfile";
+import PatientAppointment from "./pages/patient/PatientAppointment";
 
 function App() {
   const { loading } = useSelector((state) => state.alerts);
+
   return (
     <>
       <Router>
+        {/* <Navbar /> */}
         {loading ? (
           <Spinner />
         ) : (
           <Routes>
+            {/* Private Routes  */}
             <Route
               path="/apply-doctor"
               element={
                 <ProtectedRoutes>
                   <ApplyDoctor />
+                </ProtectedRoutes>
+              }
+            />
+            <Route
+              path="/apply-patient"
+              element={
+                <ProtectedRoutes>
+                  <ApplyPatient />
                 </ProtectedRoutes>
               }
             />
@@ -49,6 +64,14 @@ function App() {
               }
             />
             <Route
+              path="/admin/patients"
+              element={
+                <ProtectedRoutes>
+                  <Patients />
+                </ProtectedRoutes>
+              }
+            />
+            <Route
               path="/doctor/profile/:id"
               element={
                 <ProtectedRoutes>
@@ -56,6 +79,16 @@ function App() {
                 </ProtectedRoutes>
               }
             />
+
+            <Route
+              path="/patient/profile/:id"
+              element={
+                <ProtectedRoutes>
+                  <PatientProfile />
+                </ProtectedRoutes>
+              }
+            />
+
             <Route
               path="/doctor/book-appointment/:doctorId"
               element={
@@ -64,6 +97,7 @@ function App() {
                 </ProtectedRoutes>
               }
             />
+
             <Route
               path="/notification"
               element={
@@ -72,6 +106,35 @@ function App() {
                 </ProtectedRoutes>
               }
             />
+
+            <Route
+              path="/appointments"
+              element={
+                <ProtectedRoutes>
+                  <Appointments />
+                </ProtectedRoutes>
+              }
+            />
+
+            <Route
+              path="/doctor-appointments"
+              element={
+                <ProtectedRoutes>
+                  <DoctorAppointments />
+                </ProtectedRoutes>
+              }
+            />
+
+            <Route
+              path="/patient-appointments"
+              element={
+                <ProtectedRoutes>
+                  <PatientAppointment />
+                </ProtectedRoutes>
+              }
+            />
+
+            {/* Public Route  */}
             <Route
               path="/login"
               element={
@@ -88,22 +151,6 @@ function App() {
                 </PublicRoute>
               }
             />
-            <Route
-              path="/appointments"
-              element={
-                <ProtectedRoutes>
-                  <Appointments />
-                </ProtectedRoutes>
-              }
-            />
-            <Route
-              path="/doctor-appointments"
-              element={
-                <ProtectedRoutes>
-                  <DoctorAppointments />
-                </ProtectedRoutes>
-              }
-            />
 
             <Route
               path="/"
@@ -113,6 +160,8 @@ function App() {
                 </ProtectedRoutes>
               }
             />
+
+            {/* <Route path="/" element={<HomePagePublic />} /> */}
           </Routes>
         )}
       </Router>
